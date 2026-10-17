@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>AR Bakteriofag T4 – Media Pembelajaran Virus</title>
+<title>AR Bakteriofag T4 – Media Pembelajaran Biologi</title>
 <style>
   :root{
     --bg1:#0f1d2e; --bg2:#1d2b4a;
@@ -20,6 +20,9 @@
   header h1{margin:0;font:600 20px/1.1 Georgia,"Times New Roman",serif;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.5)}
   header p{margin:3px 0 0;font-size:12px;color:#d6e2ee;text-shadow:0 1px 6px rgba(0,0,0,.6)}
   #camBtn{pointer-events:auto;border:0;border-radius:999px;padding:10px 14px;font:600 13px system-ui;background:var(--accent);color:var(--accent-ink);box-shadow:0 4px 14px rgba(0,0,0,.35);cursor:pointer;white-space:nowrap}
+  .hbtns{display:flex;gap:6px;align-items:center;pointer-events:auto}
+  #openBtn{border-radius:999px;padding:10px 14px;font:600 13px system-ui;background:#fff;color:var(--ink);text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.35);white-space:nowrap}
+  #openBtn[hidden]{display:none}
   #camBtn.on{background:#fff;color:var(--ink)}
 
   #label{position:fixed;z-index:4;pointer-events:none;transform:translate(-50%,-130%);background:#fff;color:var(--ink);font:600 12px system-ui;padding:5px 9px;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.3);display:none;white-space:nowrap}
@@ -64,10 +67,10 @@
 
 <header>
   <div>
-    <h1>Bakteriofag T4 - AR Pembelajaran Biologi</h1>
-    <p>dev: Ahmad Himawan</p>
+    <h1>Virus Bakteriofag T4 - 3D Model</h1>
+    <p>pengembang: Ahmad Himawan</p>
   </div>
-  <button id="camBtn" type="button">Nyalakan kamera AR</button>
+  <div class="hbtns"><a id="openBtn" href="#" target="_blank" rel="noopener" hidden>Buka layar penuh</a><button id="camBtn" type="button">Nyalakan kamera AR</button></div>
 </header>
 
 <div id="label"></div>
@@ -368,7 +371,7 @@
       toast('Arahkan ke meja. Seret untuk memutar, cubit untuk memperbesar, atau pakai mode geser.');
     } catch (err){
       stream = null;
-      toast('Izin kamera ditolak atau kamera tidak ditemukan. Izinkan akses kamera di pengaturan peramban.');
+      toast(window.self !== window.top ? 'Kamera biasanya diblokir di dalam Canva. Ketuk "Buka layar penuh" untuk memakai AR.' : 'Izin kamera ditolak atau kamera tidak ditemukan. Izinkan akses kamera di pengaturan peramban.');
     }
   });
 
@@ -529,6 +532,8 @@
   ['pointerup','pointercancel','change'].forEach(ev=>slider.addEventListener(ev,()=>dragS=false));
   slider.addEventListener('input',()=>{ simT=slider.value/10; });
   function fitView(){ camera.setViewOffset(innerWidth,innerHeight,0,(lastDH-56)/2,innerWidth,innerHeight); }
+
+  if (window.self !== window.top){ const o=$('openBtn'); o.hidden=false; o.href=location.href; }
 
   /* ---------- Render ---------- */
   function resize(){
