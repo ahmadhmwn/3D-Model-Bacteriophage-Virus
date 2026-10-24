@@ -102,10 +102,12 @@
 </div>
 
 <header>
+  <div id="devCard"><span>Pengembang</span><b>Ahmad Himawan</b></div>
   <div>
     <h1 id="vTitle">Bakteriofag T4</h1>
+    <p></p>
   </div>
-  <p>dev: Ahmad Himawan</p>
+  
   <div class="hbtns"><a id="openBtn" href="#" target="_blank" rel="noopener" hidden>Buka layar penuh</a><button id="camBtn" type="button">Nyalakan kamera AR</button></div>
 </header>
 
@@ -349,7 +351,7 @@
 
   /* ---------- Virus lain ---------- */
   const V3 = THREE.Vector3;
-  const VIR = {phage:{tab:'Bakteriofag', name:'Bakteriofag T4', sub:'dev: Ahmad Himawan', parts:parts.slice(), model}};
+  const VIR = {phage:{tab:'Bakteriofag', name:'Bakteriofag T4', sub:'virus kompleks', parts:parts.slice(), model}};
   function newVirus(k, tab, name, sub){
     const g = new THREE.Group(); g.visible = false; phage.add(g);
     curModel = g; curParts = []; VIR[k] = {tab, name, sub, parts:curParts, model:g};
